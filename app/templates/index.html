@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Container Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .badge {
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .info-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .info-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .info-value {
+            color: #667eea;
+            font-family: monospace;
+        }
+        
+        .button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .button:hover {
+            background: #5568d3;
+        }
+        
+        .files-section {
+            margin-top: 30px;
+        }
+        
+        .file-list {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            padding: 10px;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status.online {
+            background: #10b981;
+        }
+        
+        .status.offline {
+            background: #ef4444;
+        }
+        
+        .github-link {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .github-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .github-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☁️ Cloud Container Portfolio</h1>
+        <p class="subtitle">Demonstrating Docker, Kubernetes & AWS Integration</p>
+        
+        <div class="tech-stack">
+            <span class="badge">🐳 Docker</span>
+            <span class="badge">☸️ Kubernetes</span>
+            <span class="badge">☁️ AWS S3</span>
+            <span class="badge">🔐 IAM</span>
+            <span class="badge">🐍 Python Flask</span>
+        </div>
+        
+        <div class="info-section">
+            <h2>Application Status</h2>
+            <div class="info-item">
+                <span class="info-label">
+                    <span class="status online"></span>Service Status
+                </span>
+                <span class="info-value">Running</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">S3 Bucket</span>
+                <span class="info-value">{{ bucket_name }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Container</span>
+                <span class="info-value">Dockerized</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Orchestration</span>
+                <span class="info-value">Kubernetes Ready</span>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2>Features Demonstrated</h2>
+            <ul style="padding-left: 20px; color: #555; line-height: 1.8;">
+                <li>✅ Multi-stage Docker build optimization</li>
+                <li>✅ Kubernetes deployment with resource limits</li>
+                <li>✅ AWS S3 integration via boto3</li>
+                <li>✅ IAM roles and security policies</li>
+                <li>✅ Health checks and readiness probes</li>
+                <li>✅ ConfigMaps and Secrets management</li>
+                <li>✅ CI/CD with GitHub Actions</li>
+                <li>✅ GPU deployment configuration</li>
+            </ul>
+        </div>
+        
+        <div class="files-section">
+            <h2 style="margin-bottom: 15px; color: #333;">S3 Files</h2>
+            <button class="button" onclick="loadFiles()">Load Files from S3</button>
+            <div id="fileList" class="file-list" style="margin-top: 15px; display: none;">
+                <p style="text-align: center; color: #999;">Loading...</p>
+            </div>
+        </div>
+        
+        <div class="github-link">
+            <a href="https://github.com/guiDaros/cloud-container/" target="_blank">
+                View on GitHub
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        async function loadFiles() {
+            const fileList = document.getElementById('fileList');
+            fileList.style.display = 'block';
+            fileList.innerHTML = '<p style="text-align: center; color: #999;">Loading...</p>';
+            
+            try {
+                const response = await fetch('/files');
+                const data = await response.json();
+                
+                if (data.files && data.files.length > 0) {
+                    fileList.innerHTML = data.files.map(file => `
+                        <div class="file-item">
+                            <span>📄 ${file.name}</span>
+                            <span style="color: #999; font-size: 0.9em;">${(file.size / 1024).toFixed(2)} KB</span>
+                        </div>
+                    `).join('');
+                } else {
+                    fileList.innerHTML = `
+                        <p style="text-align: center; color: #999;">
+                            ${data.message || 'No files found. Configure AWS credentials to use real S3.'}
+                        </p>
+                    `;
+                }
+            } catch (error) {
+                fileList.innerHTML = '<p style="text-align: center; color: #ef4444;">Error loading files</p>';
+            }
+        }
+    </script>
+</body>
+</html>
