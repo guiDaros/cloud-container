@@ -508,10 +508,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Contact
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
+**Guilherme Vassoller Daros**
+- GitHub: [@guiDaros](https://github.com/guiDaros/)
+- LinkedIn: [Guilherme Vassoller Daros](https://www.linkedin.com/in/guilherme-vassoller-daros/)
+- Email: guivdaros@gmail.com
 
 ## 🙏 Acknowledgments
 
