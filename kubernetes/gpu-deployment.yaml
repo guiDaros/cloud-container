@@ -1,88 +1,104 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloud-portfolio-app
+  name: cloud-portfolio-gpu
   namespace: cloud-portfolio
   labels:
-    app: cloud-portfolio
-    version: v1.0.0
+    app: cloud-portfolio-gpu
+    workload: ml
 spec:
-  replicas: 3
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
+  replicas: 1
   selector:
     matchLabels:
-      app: cloud-portfolio
+      app: cloud-portfolio-gpu
   template:
     metadata:
       labels:
-        app: cloud-portfolio
-        version: v1.0.0
+        app: cloud-portfolio-gpu
+        workload: ml
     spec:
+      # Node selector to ensure scheduling on GPU nodes
+      nodeSelector:
+        accelerator: nvidia-gpu
+      
+      # Tolerations to allow scheduling on tainted GPU nodes
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Equal
+        value: "true"
+        effect: NoSchedule
+      
       containers:
-      - name: cloud-portfolio
+      - name: cloud-portfolio-gpu
         image: guilhermedaros/cloud-container-portfolio:latest
         imagePullPolicy: Always
+        
         ports:
         - containerPort: 5000
           name: http
-          protocol: TCP
         
-        # Resource limits and requests
+        # GPU resource requests and limits
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "250m"
+            memory: "1Gi"
+            cpu: "1000m"
+            nvidia.com/gpu: 1  # Request 1 GPU
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "2Gi"
+            cpu: "2000m"
+            nvidia.com/gpu: 1  # Limit to 1 GPU
         
-        # Environment variables from ConfigMap
+        # Environment variables for GPU
+        env:
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: "all"
+        - name: NVIDIA_DRIVER_CAPABILITIES
+          value: "compute,utility"
+        - name: CUDA_VISIBLE_DEVICES
+          value: "0"
+        
+        # Environment from ConfigMap
         envFrom:
         - configMapRef:
             name: cloud-portfolio-config
         
-        # Environment variables from Secret
-        env:
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: aws-credentials
-              key: access-key-id
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: aws-credentials
-              key: secret-access-key
+        # AWS credentials from Secret
+        - secretRef:
+            name: aws-credentials
         
-        # Liveness probe 
+        # Health checks
         livenessProbe:
           httpGet:
             path: /health
             port: 5000
-          initialDelaySeconds: 30
-          periodSeconds: 10
+          initialDelaySeconds: 60
+          periodSeconds: 15
           timeoutSeconds: 5
           failureThreshold: 3
         
-        # Readiness probe 
         readinessProbe:
           httpGet:
             path: /ready
             port: 5000
-          initialDelaySeconds: 10
-          periodSeconds: 5
+          initialDelaySeconds: 30
+          periodSeconds: 10
           timeoutSeconds: 3
           failureThreshold: 3
-        
-        # Security context
-        securityContext:
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 1000
-          capabilities:
-            drop:
-            - ALL
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloud-portfolio-gpu-service
+  namespace: cloud-portfolio
+  labels:
+    app: cloud-portfolio-gpu
+spec:
+  type: ClusterIP
+  selector:
+    app: cloud-portfolio-gpu
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 5000
