@@ -1,8 +1,4 @@
 # ☁️ Cloud Container Portfolio
-
-![GitHub Actions](https://img.shields.io/github/actions/workflow/status/guiDaros/cloud-container-portfolio/ci-cd.yaml?branch=main)
-![Docker Pulls](https://img.shields.io/docker/pulls/guiDaros/cloud-container-portfolio)
-![Docker Image Size](https://img.shields.io/docker/image-size/guiDaros/cloud-container-portfolio)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Docker](https://img.shields.io/badge/docker-enabled-blue.svg)
