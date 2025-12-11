@@ -1,0 +1,51 @@
+{
+  "Role": {
+    "RoleName": "cloud-portfolio-s3-role",
+    "Description": "IAM role for cloud-portfolio application to access S3",
+    "AssumeRolePolicyDocument": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "ec2.amazonaws.com"
+          },
+          "Action": "sts:AssumeRole"
+        }
+      ]
+    },
+    "ManagedPolicyArns": [
+      "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+    ],
+    "InlinePolicies": {
+      "S3AccessPolicy": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "s3:ListBucket",
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:DeleteObject"
+            ],
+            "Resource": [
+              "arn:aws:s3:::cloud-portfolio-storage",
+              "arn:aws:s3:::cloud-portfolio-storage/*"
+            ]
+          }
+        ]
+      }
+    },
+    "Tags": [
+      {
+        "Key": "Project",
+        "Value": "cloud-container-portfolio"
+      },
+      {
+        "Key": "Environment",
+        "Value": "production"
+      }
+    ]
+  }
+}
