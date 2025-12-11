@@ -1,8 +1,8 @@
 # ☁️ Cloud Container Portfolio
 
-![GitHub Actions](https://img.shields.io/github/actions/workflow/status/yourusername/cloud-container-portfolio/ci-cd.yaml?branch=main)
-![Docker Pulls](https://img.shields.io/docker/pulls/yourusername/cloud-container-portfolio)
-![Docker Image Size](https://img.shields.io/docker/image-size/yourusername/cloud-container-portfolio)
+![GitHub Actions](https://img.shields.io/github/actions/workflow/status/guiDaros/cloud-container-portfolio/ci-cd.yaml?branch=main)
+![Docker Pulls](https://img.shields.io/docker/pulls/guiDaros/cloud-container-portfolio)
+![Docker Image Size](https://img.shields.io/docker/image-size/guiDaros/cloud-container-portfolio)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Docker](https://img.shields.io/badge/docker-enabled-blue.svg)
@@ -108,16 +108,6 @@ The application follows a three-tier architecture with clear separation of conce
 - ✅ **Security scanning** with Trivy vulnerability detection
 - ✅ **Automated Docker Hub publishing** with semantic versioning
 
-## 🐳 Docker Image
-
-**Public Repository**: [`yourusername/cloud-container-portfolio`](https://hub.docker.com/r/yourusername/cloud-container-portfolio)
-
-The Docker image is publicly available on Docker Hub and automatically built via GitHub Actions on every push to the main branch.
-
-**Pull the image:**
-```bash
-docker pull yourusername/cloud-container-portfolio:latest
-```
 
 **Image Details:**
 - **Size**: ~150MB (optimized with multi-stage builds)
@@ -240,7 +230,7 @@ Complete setup instructions are available in [`aws/integration-guide.md`](aws/in
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/cloud-container-portfolio.git
+git clone https://github.com/guiDaros/cloud-container-portfolio.git
 cd cloud-container-portfolio
 ```
 
@@ -525,4 +515,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **⭐ If this project demonstrates skills relevant to your needs, please consider starring the repository!**
 
-**🔗 Project Link**: https://github.com/yourusername/cloud-container-portfolio
+**🔗 Project Link**: https://github.com/guiDaros/cloud-container-portfolio
